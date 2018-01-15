@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Khres.Persistent;
+using AutoMapper;
 
 namespace Khres
 {
@@ -28,6 +29,7 @@ namespace Khres
             // connectionString: get from appsetting.development.json         
             services.AddDbContext<KhresDbContext>(options => options.UseSqlServer(Configuration.GetSection("ConnectionString")["Default"]));
             services.AddMvc();
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
