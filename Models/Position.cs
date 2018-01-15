@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Khres.Models
@@ -9,7 +11,10 @@ namespace Khres.Models
         [MaxLength(255)]
         public string Title { get; set; }
 
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }        
+        public ICollection<Employee> Employees { get; set; }
+        public Position()
+        {
+            Employees = new Collection<Employee>();
+        }      
     }
 }

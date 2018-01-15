@@ -19,11 +19,7 @@ namespace Khres.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        public ICollection<Position> Positions { get; set; }
-
-        public Employee()
-        {
-            Positions = new Collection<Position>();
-        }
+        public int PositionId { get; set; }
+        public Position Position { get; set; }        
     }
 }

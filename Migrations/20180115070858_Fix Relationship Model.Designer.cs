@@ -11,9 +11,10 @@ using System;
 namespace Khres.Migrations
 {
     [DbContext(typeof(KhresDbContext))]
-    partial class KhresDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180115070858_Fix Relationship Model")]
+    partial class FixRelationshipModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
