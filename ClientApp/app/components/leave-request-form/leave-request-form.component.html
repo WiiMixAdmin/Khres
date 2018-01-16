@@ -4,14 +4,17 @@
 <form>
     <div class="form-group">  
       <label for="title">Title</label>
-      <select class="form-control" id="title" (change)="onTitleChange()">
+      <select class="form-control" id="title" (change)="onTitleChange()" [(ngModel)]="selectedPositionId" name="position">
         <option value=""></option>
         <option *ngFor="let p of positions" value="{{p.id}}">{{p.title}}</option>   
       </select>
     </div>
     <div class="fomr-group">
       <label for="employee">Employee Name</label>
-      <select class="form-control" id="employee"></select>
+      <select class="form-control" id="employee">
+        <option value=""></option>
+        <option *ngFor="let ae of availableEmployee" value="{{ae.id}}">{{ae.firstName}} {{ae.lastName}}</option>
+      </select>
     </div>
 </form>
 

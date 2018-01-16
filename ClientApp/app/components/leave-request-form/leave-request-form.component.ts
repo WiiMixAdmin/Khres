@@ -10,6 +10,8 @@ import { Position } from '../../models/position';
 export class LeaveRequestFormComponent implements OnInit {
   employees: any;
   positions: Position[];
+  selectedPositionId: Number;
+  availableEmployee: any[];
 
   constructor(private service: LeaveRequestService) {    
   }
@@ -20,16 +22,19 @@ export class LeaveRequestFormComponent implements OnInit {
       this.positions = new Array<Position>();
       for(let e of this.employees) {       
         let existed = this.positions.some(p => p.getId() === e.position.id);
-        if(!existed){
-          let pos = new Position(e.position.id, e.position.title);
-          this.positions.push(pos);
+        if(!existed){         
+          this.positions.push(new Position(e.position.id, e.position.title));
         }   
       }
     });
   }
 
   onTitleChange() {
-    console.log("change");
+    this.availableEmployee = [];
+    for(let e of this.employees) {    
+      if(Number(e.positionId) === Number(this.selectedPositionId)) {            
+        this.availableEmployee.push(e);
+      }
+    }         
   }
-
 }
