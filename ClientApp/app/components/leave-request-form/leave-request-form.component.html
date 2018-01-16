@@ -1,3 +1,17 @@
-<p>
-  leave-request-form works!
-</p>
+<h1>
+  New Leave Request
+</h1>
+<form>
+    <div class="form-group">  
+      <label for="title">Title</label>
+      <select class="form-control" id="title" (change)="onTitleChange()">
+        <option value=""></option>
+        <option *ngFor="let p of positions" value="{{p.id}}">{{p.title}}</option>   
+      </select>
+    </div>
+    <div class="fomr-group">
+      <label for="employee">Employee Name</label>
+      <select class="form-control" id="employee"></select>
+    </div>
+</form>
+

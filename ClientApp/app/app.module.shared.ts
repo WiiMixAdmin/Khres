@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { LeaveRequestFormComponent } from './components/leave-request-form/leave-request-form.component';
+import { LeaveRequestService } from './services/leave-request.service';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,9 @@ import { LeaveRequestFormComponent } from './components/leave-request-form/leave
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
+    ],
+    providers: [
+        LeaveRequestService
     ]
 })
 export class AppModuleShared {
