@@ -17,6 +17,7 @@ const treeShakableModules = [
 const nonTreeShakableModules = [
     'bootstrap',
     'bootstrap/dist/css/bootstrap.css',
+    'ngx-bootstrap/datepicker/bs-datepicker.css',
     'es6-promise',
     'es6-shim',
     'event-source-polyfill',

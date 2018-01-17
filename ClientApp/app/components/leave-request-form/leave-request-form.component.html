@@ -35,10 +35,16 @@
                       <input type="checkbox" id="{{lt.type}}" value="{{lt.id}}">
                       {{lt.type}}
                   </label>
-              </div>    
-              
+              </div>              
           </div>
-          
+          <div class="form-group">
+              <p> Request Date (Start - End)</p>
+              <label>                  
+                    <input type="text" class="form-control" #dp="bsDaterangepicker" 
+                           bsDaterangepicker [(bsValue)]="bsValue" [bsConfig] = "bsConfig">                
+              </label>
+              
+          </div>          
       </form>
 
 </div>

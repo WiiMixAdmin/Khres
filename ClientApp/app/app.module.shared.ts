@@ -11,6 +11,7 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { LeaveRequestFormComponent } from './components/leave-request-form/leave-request-form.component';
 import { LeaveRequestService } from './services/leave-request.service';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { LeaveRequestService } from './services/leave-request.service';
         CommonModule,
         HttpModule,
         FormsModule,
+        BsDatepickerModule.forRoot(),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
