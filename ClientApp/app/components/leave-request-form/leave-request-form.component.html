@@ -1,32 +1,46 @@
-<h1>
-  New Leave Request
-</h1>
-<form>
-    <div class="form-group">  
-      <label for="title">Job Title</label>
-      <select class="form-control" id="title" (change)="onTitleChange()" [(ngModel)]="selectedPositionId" name="position">
-        <option value=""></option>
-        <option *ngFor="let p of positions" value="{{p.id}}">{{p.title}}</option>   
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="employee">Employee Name</label>
-      <select class="form-control" id="employee">
-        <option value=""></option>
-        <option *ngFor="let ae of availableEmployee" value="{{ae.id}}">{{ae.firstName}} {{ae.lastName}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-        <p>Does your request urgent?</p>    
-        <label class="radio-inline" for="urgent">
-          <input type="radio" name="urgent"  id="urgent" value="true">
-          Yes
-        </label>
-        <label class="radio-inline" for="notUrgent">
-            <input type="radio" name="urgent" id="notUrgent" value="false" checked>
-            No
-        </label>
-    </div>
-    
-</form>
+<div class="component__body__content"> 
+    <h1 class="heading-1">
+        New Leave Request
+      </h1>
+      <form>
+          <div class="form-group">  
+            <label for="title">Job Title</label>
+            <select class="form-control" id="title" (change)="onTitleChange()" [(ngModel)]="selectedPositionId" name="position">
+              <option value=""></option>
+              <option *ngFor="let p of positions" value="{{p.id}}">{{p.title}}</option>   
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="employee">Employee Name</label>
+            <select class="form-control" id="employee">
+              <option value=""></option>
+              <option *ngFor="let ae of availableEmployee" value="{{ae.id}}">{{ae.firstName}} {{ae.lastName}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+              <p>Does your request urgent?</p>    
+              <label class="radio-inline" for="urgent">
+                <input type="radio" name="urgent"  id="urgent" value="true">
+                Yes
+              </label>
+              <label class="radio-inline" for="notUrgent">
+                  <input type="radio" name="urgent" id="notUrgent" value="false" checked>
+                  No
+              </label>
+          </div>
+          <div class="form-group">
+              <h2 class="heading-2">Request Information</h2>
+              <div *ngFor="let lt of leaveTypes" class="checkbox">
+                  <label for="{{lt.type}}">
+                      <input type="checkbox" id="{{lt.type}}" value="{{lt.id}}">
+                      {{lt.type}}
+                  </label>
+              </div>    
+              
+          </div>
+          
+      </form>
+
+</div>
+
 
