@@ -1,6 +1,5 @@
 import { LeaveRequestService } from './../../services/leave-request.service';
 import { Component, OnInit } from '@angular/core';
-import { Position } from '../../models/position';
 
 @Component({
   selector: 'app-leave-request-form',
@@ -8,8 +7,8 @@ import { Position } from '../../models/position';
   styleUrls: ['./leave-request-form.component.css']
 })
 export class LeaveRequestFormComponent implements OnInit {
-  employees: any;
-  positions: Position[];
+  employees: any[];
+  positions: any[];
   selectedPositionId: Number;
   availableEmployee: any[];
 
@@ -19,22 +18,32 @@ export class LeaveRequestFormComponent implements OnInit {
   ngOnInit() {
     this.service.getEmployee().subscribe(emp => {
       this.employees = emp;
-      this.positions = new Array<Position>();
-      for(let e of this.employees) {       
-        let existed = this.positions.some(p => p.getId() === e.position.id);
-        if(!existed){         
-          this.positions.push(new Position(e.position.id, e.position.title));
-        }   
-      }
+      var r = this.pluckProperty(this.employees, 'position');
+      this.positions = this.distinctById(r);     
     });
+  }
+
+  private pluckProperty(sources:any[], propertyName:string) {
+    let result:any[] = [];
+    for(let e of sources) {
+        if(e[propertyName])    
+          result.push(e[propertyName]);   
+    }    
+    return result;
+  }
+
+  private distinctById(sources:any[]) {
+    let result:any[] = [];
+    for(let p of sources) {
+      if(!result.some(x => x.id === p.id)) {
+        result.push(p);
+      }
+    }
+    return result;
   }
 
   onTitleChange() {
     this.availableEmployee = [];
-    for(let e of this.employees) {    
-      if(Number(e.positionId) === Number(this.selectedPositionId)) {            
-        this.availableEmployee.push(e);
-      }
-    }         
+    this.availableEmployee = this.employees.filter(e => Number(e.positionId) === Number(this.selectedPositionId));                
   }
 }
