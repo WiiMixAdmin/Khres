@@ -11,6 +11,9 @@ namespace Khres.Mapping
             CreateMap<Employee, EmployeeDto>();
             CreateMap<Position, PositionDto>()
             .ForMember(dest => dest.Employees, opt => opt.Ignore());
+            
+            CreateMap<CreateLeaveDto, Leave>();
+            CreateMap<CreateEmployeeLeaveDto, EmployeeLeave>();
         }        
     }
 }
