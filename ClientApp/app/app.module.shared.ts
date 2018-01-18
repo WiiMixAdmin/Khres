@@ -31,7 +31,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
-            { path: 'leave-request/new', component: LeaveRequestFormComponent},
+            { path: 'leaves/new', component: LeaveRequestFormComponent},
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
