@@ -21,13 +21,18 @@ li.link-active a:focus {
     right: 0;
     z-index: 1;
 }
+.logo__box{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
 
 .logo__text {
     color: white;
     text-transform: uppercase;
     position: absolute;
-    top: 2rem;
-    left: 6rem;
+    top: 1.6rem;
+    left: 5rem;
 }
 
 @media (min-width: 768px) {

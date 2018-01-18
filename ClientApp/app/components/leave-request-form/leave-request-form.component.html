@@ -38,13 +38,31 @@
               </div>              
           </div>
           <div class="form-group">
-              <p> Request Date (Start - End)</p>
-              <label>                  
-                    <input type="text" class="form-control" #dp="bsDaterangepicker" 
-                           bsDaterangepicker [(bsValue)]="bsValue" [bsConfig] = "bsConfig">                
-              </label>
-              
-          </div>          
+            <p> Request Date (Start - End)</p> 
+            <div class="date-range-container">
+                <input 
+                    type="text" class="form-control" #dp="bsDaterangepicker" 
+                    bsDaterangepicker [(bsValue)]="bsValue" [bsConfig] = "bsConfig">
+            </div>
+          </div>
+          <div class="form-group">
+                <label for="duration"> Duration 
+                    <input type="text" id="duration" class="form-control">
+                </label>
+                &emsp;         
+                <label class="checkbox-inline" for="halfDay">
+                    <input type="checkbox" id="halfDay"> Half Day
+                </label>
+            </div>
+          <div class="form-group">
+            <p>Description</p>              
+            <textarea class="form-control" rows="5" placeholder="Enter your reason here..."></textarea>
+          </div>
+
+          <div class="form-group">
+              <button class="btn btn-default">Submit</button>
+          </div>
+             
       </form>
 
 </div>

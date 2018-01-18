@@ -19,3 +19,9 @@
     text-transform: uppercase;
     margin-bottom: 2.5rem;
 }
+
+.date-range-container {
+    margin-left: 0;
+    padding-left: 0;
+    width: 50%;
+}

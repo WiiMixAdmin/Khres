@@ -21,7 +21,11 @@ export class LeaveRequestFormComponent implements OnInit {
   bsConfig:any = {containerClass: 'theme-red'};
 
   constructor(private service: LeaveRequestService) {
-      
+    this.leaveTypes = [];
+    this.leaveTypes.push({id: 1, type: 'Annual Leave'});
+    this.leaveTypes.push({id: 2, type: 'Sick Leave'});
+    this.leaveTypes.push({id: 3, type: 'Special Leave'});
+    this.leaveTypes.push({id: 4, type: 'Public Holiday'});   
   }
 
   ngOnInit() {
@@ -31,11 +35,7 @@ export class LeaveRequestFormComponent implements OnInit {
       this.positions = this.distinctById(r);     
     });
     
-    this.leaveTypes = [];
-    this.leaveTypes.push({id: 1, type: 'Annual Leave'});
-    this.leaveTypes.push({id: 2, type: 'Sick Leave'});
-    this.leaveTypes.push({id: 3, type: 'Special Leave'});
-    this.leaveTypes.push({id: 4, type: 'Public Holiday'});
+    
   }
 
   private pluckProperty(sources:any[], propertyName:string) {
