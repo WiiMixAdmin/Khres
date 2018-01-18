@@ -20,6 +20,12 @@ namespace Khres.Models
         public string Email { get; set; }
 
         public int PositionId { get; set; }
-        public Position Position { get; set; }        
+        public Position Position { get; set; }
+
+        public ICollection<EmployeeLeave> LeaveRequests { get; set; }
+        public Employee()
+        {
+            LeaveRequests = new Collection<EmployeeLeave>();
+        }        
     }
 }
