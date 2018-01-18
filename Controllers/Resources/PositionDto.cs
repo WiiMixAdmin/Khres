@@ -3,17 +3,17 @@ using System.Collections.ObjectModel;
 
 namespace Khres.Controllers.Resources
 {
-    public class PositionResource
+    public class PositionDto
     {
         public int Id { get; set; }
        
         public string Title { get; set; }
 
-        public ICollection<EmployeeResource> Employees { get; set; }
+        public ICollection<EmployeeDto> Employees { get; set; }
 
-        public PositionResource()
+        public PositionDto()
         {
-            Employees = new Collection<EmployeeResource>();            
+            Employees = new Collection<EmployeeDto>();            
         }
     }
 }

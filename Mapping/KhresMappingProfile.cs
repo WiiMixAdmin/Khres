@@ -8,8 +8,8 @@ namespace Khres.Mapping
     {
         public KhresMappingProfile()
         {
-            CreateMap<Employee, EmployeeResource>();
-            CreateMap<Position, PositionResource>()
+            CreateMap<Employee, EmployeeDto>();
+            CreateMap<Position, PositionDto>()
             .ForMember(dest => dest.Employees, opt => opt.Ignore());
         }        
     }

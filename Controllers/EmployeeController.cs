@@ -21,10 +21,10 @@ namespace Khres.Controllers
         }
 
         [HttpGet("/api/employees")]
-        public async Task<IEnumerable<EmployeeResource>> GetEmployees()
+        public async Task<IEnumerable<EmployeeDto>> GetEmployees()
         {
             var employees = await context.Employees.Include(e => e.Position).ToListAsync();
-            return mapper.Map<List<Employee>, List<EmployeeResource>>(employees);
+            return mapper.Map<List<Employee>, List<EmployeeDto>>(employees);
         }
     }
 }

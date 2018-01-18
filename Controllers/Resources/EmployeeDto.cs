@@ -1,6 +1,6 @@
 namespace Khres.Controllers.Resources
 {
-    public class EmployeeResource
+    public class EmployeeDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -9,6 +9,6 @@ namespace Khres.Controllers.Resources
         public string Email { get; set; }
 
         public int PositionId { get; set; }
-        public PositionResource Position { get; set; }  
+        public PositionDto Position { get; set; }  
     }
 }
