@@ -21,11 +21,10 @@ namespace Khres.Models
 
         public int PositionId { get; set; }
         public Position Position { get; set; }
-
-        public ICollection<EmployeeLeave> LeaveRequests { get; set; }
+        public ICollection<Leave> Leaves { get; set; }
         public Employee()
         {
-            LeaveRequests = new Collection<EmployeeLeave>();
-        }        
+            Leaves = new Collection<Leave>();
+        }              
     }
 }

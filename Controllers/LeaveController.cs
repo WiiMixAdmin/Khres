@@ -19,23 +19,19 @@ namespace Khres.Controllers
             this.context = context;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateLeave([FromBody]CreateEmployeeLeaveDto createEmployeeLeaveDto)
+        public async Task<IActionResult> CreateLeave([FromBody] CreateLeaveDto createLeaveDto)
         {
             if(!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            var employeeLeave = mapper.Map<CreateEmployeeLeaveDto, EmployeeLeave>(createEmployeeLeaveDto); 
-            employeeLeave.Leave.LastUpdated = DateTime.Now;
-            foreach(var typeId in createEmployeeLeaveDto.LeaveTypeIds) {
-                context.Add(new EmployeeLeave() {
-                    EmployeeId = employeeLeave.EmployeeId,
-                    LeaveTypeId = typeId,
-                    Leave = employeeLeave.Leave
-                });
-            }            
+            var leave = mapper.Map<CreateLeaveDto, Leave>(createLeaveDto);
+            leave.LastUpdated = DateTime.Now; 
+            context.Leaves.Add(leave);
+               
             await context.SaveChangesAsync();
-            return Ok(createEmployeeLeaveDto);
+            var result = mapper.Map<Leave, CreateLeaveDto>(leave);
+            return Ok(result);
         }
     }
 }

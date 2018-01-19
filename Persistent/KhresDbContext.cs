@@ -19,8 +19,7 @@ namespace Khres.Persistent
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             
             // Handle many to many by adding compound keys to third table
-            modelBuilder.Entity<EmployeeLeave>().HasKey(el => new {
-                el.EmployeeId, 
+            modelBuilder.Entity<EmployeeLeave>().HasKey(el => new {                 
                 el.LeaveId,
                 el.LeaveTypeId
             });
