@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Khres.Controllers.Resources;
@@ -51,17 +52,22 @@ namespace Khres.Controllers
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLeave(int id) {
-            
-            if(!ModelState.IsValid) {
-                return BadRequest(ModelState);
-            }
-
             var leave = await context.Leaves.FindAsync(id);
+
+            if(leave == null) return NotFound("Id not found");
+            
             context.Leaves.Remove(leave);
             
             await context.SaveChangesAsync();
             var result = mapper.Map<Leave, CreateLeaveDto>(leave);
             return Ok(result);
         }
+        [HttpGet]
+        public async Task<IEnumerable<CreateLeaveDto>> GetLeave() {
+
+            var leave = await context.Leaves.Include(x => x.EmployeeLeaves).ToListAsync();
+
+            return mapper.Map<List<Leave>,List<CreateLeaveDto>>(leave);
+        } 
     }
 }
