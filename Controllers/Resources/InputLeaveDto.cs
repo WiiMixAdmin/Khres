@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Khres.Controllers.Resources
 {
-    public class CreateLeaveDto
+    public class InputLeaveDto
     {        
         [Required]
         public int EmployeeId { get; set; }

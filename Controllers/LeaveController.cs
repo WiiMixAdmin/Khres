@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Khres.Controllers.Resources;
@@ -21,32 +22,33 @@ namespace Khres.Controllers
             this.context = context;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateLeave([FromBody] CreateLeaveDto createLeaveDto)
+        public async Task<IActionResult> CreateLeave([FromBody] InputLeaveDto createLeaveDto)
         {
             if(!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            var leave = mapper.Map<CreateLeaveDto, Leave>(createLeaveDto);
+            var leave = mapper.Map<InputLeaveDto, Leave>(createLeaveDto);
             leave.LastUpdated = DateTime.Now; 
             context.Leaves.Add(leave);
                
             await context.SaveChangesAsync();
-            var result = mapper.Map<Leave, CreateLeaveDto>(leave);
+            var result = mapper.Map<Leave, InputLeaveDto>(leave);
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateLeave(int id, [FromBody] CreateLeaveDto createLeaveDto) {
+        public async Task<IActionResult> UpdateLeave(int id, [FromBody] InputLeaveDto createLeaveDto) {
             if(!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
             var leave = await context.Leaves.Include(x => x.EmployeeLeaves).SingleOrDefaultAsync(x => x.Id == id);
-            mapper.Map<CreateLeaveDto, Leave>(createLeaveDto, leave);
+            leave.LastUpdated = DateTime.Now;
+            mapper.Map<InputLeaveDto, Leave>(createLeaveDto, leave);
 
             await context.SaveChangesAsync();
-            var result  = mapper.Map<Leave, CreateLeaveDto>(leave);
+            var result  = mapper.Map<Leave, InputLeaveDto>(leave);
             return Ok(result);
         }
 
@@ -59,15 +61,18 @@ namespace Khres.Controllers
             context.Leaves.Remove(leave);
             
             await context.SaveChangesAsync();
-            var result = mapper.Map<Leave, CreateLeaveDto>(leave);
+            var result = mapper.Map<Leave, InputLeaveDto>(leave);
             return Ok(result);
         }
         [HttpGet]
-        public async Task<IEnumerable<CreateLeaveDto>> GetLeave() {
+        public async Task<IEnumerable<OutputLeaveDto>> GetLeave() {
 
-            var leave = await context.Leaves.Include(x => x.EmployeeLeaves).ToListAsync();
+            var leave = await context.Leaves
+            .Include(x => x.Employee)
+            .Include(x => x.EmployeeLeaves)
+            .Include("EmployeeLeaves.Type").ToListAsync();
 
-            return mapper.Map<List<Leave>,List<CreateLeaveDto>>(leave);
+            return mapper.Map<List<Leave>,List<OutputLeaveDto>>(leave);
         } 
     }
 }

@@ -15,7 +15,7 @@ namespace Khres.Mapping
             .ForMember(dest => dest.Employees, opt => opt.Ignore());
             
             CreateMap<LeaveDetailDto, LeaveDetail>().ReverseMap();
-            CreateMap<CreateLeaveDto, Leave>()
+            CreateMap<InputLeaveDto, Leave>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .AfterMap((src, dest) => {
                 var removedLeaveTypes = new List<EmployeeLeave>();
@@ -35,13 +35,14 @@ namespace Khres.Mapping
                     dest.EmployeeLeaves.Remove(el);
                 });                
             });
-            /*
-            .ForMember(dest => dest.EmployeeLeaves, opt => opt.MapFrom(s => s.LeaveTypeIds.Select(x => new EmployeeLeave() {
-                LeaveTypeId = x
-            }))); */
 
-            CreateMap<Leave, CreateLeaveDto>()
+            CreateMap<Leave, InputLeaveDto>()
             .ForMember(dest => dest.LeaveTypeIds, opt => opt.MapFrom(s => s.EmployeeLeaves.Select(x => x.LeaveTypeId)));
+
+            CreateMap<Leave, OutputLeaveDto>()
+            .ForMember(dest => dest.LeaveTypes, opt => opt.MapFrom(s => s.EmployeeLeaves.Select(x => 
+                new LeaveTypeDto() { Id = x.Type.Id, Label = x.Type.Label }
+            )));
         }        
     }
 }
