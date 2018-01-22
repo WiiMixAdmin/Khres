@@ -17,23 +17,16 @@ namespace Khres.Mapping
             CreateMap<LeaveDetailDto, LeaveDetail>().ReverseMap();
             CreateMap<InputLeaveDto, Leave>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
-            .AfterMap((src, dest) => {
-                var removedLeaveTypes = new List<EmployeeLeave>();
-                foreach(var s in src.LeaveTypeIds) {
-                    var itemExisted = dest.EmployeeLeaves.Any(x => x.LeaveTypeId == s);
-                    if(!itemExisted) dest.EmployeeLeaves.Add(new EmployeeLeave() {LeaveTypeId = s});
-                }
+            .AfterMap((src, dest) => { 
 
-                foreach(var d in dest.EmployeeLeaves) {
-                    var itemExisted = src.LeaveTypeIds.Contains(d.LeaveTypeId);
-                    if(!itemExisted) {
-                        removedLeaveTypes.Add(d);
-                    }    
-                }
-
-                removedLeaveTypes.ForEach(el => {
-                    dest.EmployeeLeaves.Remove(el);
-                });                
+                var addItems = src.LeaveTypeIds.Where(x => dest.EmployeeLeaves.Any(t => t.LeaveTypeId != x))
+                .Select(tId => new EmployeeLeave() {LeaveTypeId = tId});
+                foreach(var i in addItems) 
+                    dest.EmployeeLeaves.Add(i);
+                
+                var deleteItems = dest.EmployeeLeaves.Where(x => !src.LeaveTypeIds.Contains(x.LeaveTypeId));
+                foreach(var i in deleteItems)
+                    dest.EmployeeLeaves.Remove(i);            
             });
 
             CreateMap<Leave, InputLeaveDto>()
